@@ -1,18 +1,17 @@
 const { celebrate, Joi } = require('celebrate');
-const { email, password, name } = require('./constants');
 
 const signinRouteValidation = celebrate({
   body: Joi.object().keys({
-    email,
-    password,
+    email: Joi.string().min(3).required().email(),
+    password: Joi.string().required(),
   }),
 });
 
 const signupRouteValidation = celebrate({
   body: Joi.object().keys({
-    name,
-    email,
-    password,
+    name: Joi.string().min(2).max(30),
+    email: Joi.string().min(3).required().email(),
+    password: Joi.string().required(),
   }),
 });
 

@@ -1,10 +1,9 @@
 const { celebrate, Joi } = require('celebrate');
-const { email, name } = require('./constants');
 
 const usersMeRouteValidation = celebrate({
   body: Joi.object().keys({
-    email,
-    name,
+    email: Joi.string().min(3).required().email(),
+    name: Joi.string().min(2).max(30),
   }),
 });
 
