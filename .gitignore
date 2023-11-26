@@ -32,4 +32,4 @@ node_modules
 /build
 
 # backend
-/backend/.env
+.env
