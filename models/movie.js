@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const { wrongImage, wrongTrailerLink, wrongThumbnail } = require('../constants/constants');
 
 const movieSchema = new mongoose.Schema(
   {
@@ -33,7 +34,7 @@ const movieSchema = new mongoose.Schema(
       trim: true,
       validate: {
         validator: validator.isURL,
-        message: 'Incorrect image',
+        message: wrongImage,
       },
     },
     trailerLink: {
@@ -42,7 +43,7 @@ const movieSchema = new mongoose.Schema(
       trim: true,
       validate: {
         validator: validator.isURL,
-        message: 'Incorrect trailerLink',
+        message: wrongTrailerLink,
       },
     },
     thumbnail: {
@@ -51,7 +52,7 @@ const movieSchema = new mongoose.Schema(
       trim: true,
       validate: {
         validator: validator.isURL,
-        message: 'Incorrect thumbnail',
+        message: wrongThumbnail,
       },
     },
     owner: {

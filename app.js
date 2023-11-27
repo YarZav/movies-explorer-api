@@ -7,11 +7,12 @@ const limiter = require('./middlewares/limiter');
 const routes = require('./routes/routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/errorHandler');
+const { dataBase } = require('./constants/constants');
 
 const { PORT = 3000 } = process.env;
 const app = express();
 
-mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb');
+mongoose.connect(dataBase);
 
 app.use(cors());
 app.use(express.json());

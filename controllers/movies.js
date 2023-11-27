@@ -1,10 +1,14 @@
 const Movie = require('../models/movie');
 const ForbiddenError = require('../errors/ForbiddenError');
+const { successCreatedCode, wrongMovieId } = require('../constants/constants');
 
 module.exports.getMovies = (req, res, next) => {
   Movie.find({})
     .populate('owner')
-    .then((movies) => res.send({ data: movies }))
+    .then((movies) => {
+      const userMovies = movies.filter((movie) => movie.owner.equals(req.user._id));
+      return res.send({ data: userMovies });
+    })
     .catch(next);
 };
 
@@ -41,7 +45,7 @@ module.exports.postMovies = (req, res, next) => {
     .then((newMovie) => {
       Movie.findById(newMovie.id)
         .populate('owner')
-        .then((movie) => res.status(201).send({ data: movie }));
+        .then((movie) => res.status(successCreatedCode).send({ data: movie }));
     })
     .catch(next);
 };
@@ -55,7 +59,7 @@ module.exports.deleteMovies = (req, res, next) => {
           .orFail()
           .then((deletedMovie) => res.send({ data: deletedMovie }));
       } else {
-        next(new ForbiddenError('Wrong movie id'));
+        next(new ForbiddenError(wrongMovieId));
       }
     })
     .catch(next);

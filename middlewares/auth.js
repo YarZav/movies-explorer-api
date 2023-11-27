@@ -1,11 +1,8 @@
 const jwt = require('jsonwebtoken');
 const UnauthorizedError = require('../errors/UnauthorizedError');
-const { secret } = require('../constants/constants');
+const { secret, bearerHeader, wrongLoginOrPasswordMessage } = require('../constants/constants');
 
 module.exports = (req, res, next) => {
-  const bearerHeader = 'Bearer ';
-  const wrongLoginOrPasswordMessage = 'Wrong login or password';
-
   const { authorization } = req.headers;
 
   if (!authorization || !authorization.startsWith(bearerHeader)) {

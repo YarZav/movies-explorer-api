@@ -6,7 +6,8 @@ Backend для аутентификации/авториазции пользо�
 
 **адрес домена сервера:**
 
-`https://api.ylincoln.nomoredomainsmonster.ru`
+IP: 158.160.96.226
+DNS: `https://api.ylincoln.nomoredomainsmonster.ru`
 
 ## Схемы и модели ресурсов API
 
